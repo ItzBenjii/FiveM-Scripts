@@ -10,7 +10,7 @@ local hostageAllowedWeapons = {
 
 local holdingHostageInProgress = false
 
-RegisterCommand("takehostage",function()
+RegisterCommand("gidsel",function()
 	takeHostage()
 end)
 
@@ -32,7 +32,7 @@ function takeHostage()
 	end
 
 	if not canTakeHostage then 
-		drawNativeNotification("You need a pistol with ammo to take a hostage at gunpoint!")
+		drawNativeNotification("Du har brug for en pistol med skud, for at udføre en gidseltagning!")
 	end
 
 	if not holdingHostageInProgress and canTakeHostage then		
@@ -64,7 +64,7 @@ function takeHostage()
 			TriggerServerEvent('cmg3_animations:sync', closestPlayer, lib,lib2, anim1, anim2, distans, distans2, height,target,length,spin,controlFlagMe,controlFlagTarget,animFlagTarget,attachFlag)
 		else
 			--print("[CMG Anim] No player nearby")
-			drawNativeNotification("No one nearby to take as hostage!")
+			drawNativeNotification("Ingen i nærheden til at tage som gidsel!")
 		end 
 	end
 	canTakeHostage = false 
@@ -198,7 +198,7 @@ Citizen.CreateThread(function()
 			DisableControlAction(0,58,true) -- disable weapon
 			DisablePlayerFiring(GetPlayerPed(-1),true)
 			local playerCoords = GetEntityCoords(GetPlayerPed(-1))
-			DrawText3D(playerCoords.x,playerCoords.y,playerCoords.z,"Press [G] to release, [H] to kill")
+			DrawText3D(playerCoords.x,playerCoords.y,playerCoords.z,"Tryk &a[G] for at slippe gidslet, &c[H] for at dræbe gidslet")
 			if IsDisabledControlJustPressed(0,47) then --release
 				--print("release this mofo")			
 				holdingHostage = false
